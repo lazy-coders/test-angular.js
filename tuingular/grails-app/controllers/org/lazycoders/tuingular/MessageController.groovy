@@ -22,16 +22,25 @@ class MessageController {
 
 	def list() {
 		if (session.user) {
-			User u = User.get(session.user.id)
+			User user = User.get(session.user.id)
 			render(contentType: "text/json") {
-				result('OK')
-				messages {
-					for(m in u.messages) {
-						message(id: m.id, text:m.text)
+				result = 'OK'
+				messages = [
+					{
+						user.messages.each { message ->
+							id = messsage.id
+							text = message.text
+						}
 					}
-				}
+				]
 			}
 
+		}
+		else {
+			render(contentType: "text/json") {
+				result = 'FAIL'
+				reason = 'No user'
+			}
 		}
 	}
 

@@ -25,14 +25,7 @@ class MessageController {
 			User user = User.get(session.user.id)
 			render(contentType: "text/json") {
 				result = 'OK'
-				messages = [
-					{
-						user.messages.each { message ->
-							id = messsage.id
-							text = message.text
-						}
-					}
-				]
+				messages = user.messages
 			}
 
 		}

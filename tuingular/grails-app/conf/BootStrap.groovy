@@ -1,6 +1,5 @@
 import org.lazycoders.tuingular.User
 import org.lazycoders.tuingular.Message
-import grails.converters.JSON
 
 class BootStrap {
 	def init = { servletContext ->
@@ -11,14 +10,6 @@ class BootStrap {
 		u.addToMessages(new Message(text: "ains", wrote_in: new Date()))
 		u.save(failOnError: true)
 
-
-		JSON.registerObjectMarshaller(Message) { Message message ->
-			return [
-				id: message.id,
-				text: message.text,
-				wrote_in: message.wrote_in
-			]
-		}
 	}
 
 	def destroy = {
